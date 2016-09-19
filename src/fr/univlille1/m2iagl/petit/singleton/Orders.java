@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.univlille1.m2iagl.petit.Order;
-import fr.univlille1.m2iagl.petit.singleton.itf.SingletonItf;
 
-public class Orders implements SingletonItf {
+public class Orders {
 
 	protected List<Order> allOrders;
 

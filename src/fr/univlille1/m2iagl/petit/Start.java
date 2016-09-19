@@ -7,9 +7,10 @@ public class Start {
 
 	public static void main(String[] args) {
 		System.out.println("Begin Orders and Clients application :\n");
-		Orders orders = new Orders();
-		Clients clients = new Clients();
+		Orders orders = new Orders();		
 		
+		Clients clients = new Clients();
+				
 		Client clientA = new Client("A", "Town A");
 		Client clientB = new Client("B", "Town B");
 		Client clientC = new Client("C", "Town C");

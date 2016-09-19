@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.univlille1.m2iagl.petit.Client;
-import fr.univlille1.m2iagl.petit.singleton.itf.SingletonItf;
 
-public class Clients implements SingletonItf {
+public class Clients {
 
 	protected List<Client> allClient;
 
