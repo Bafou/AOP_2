@@ -6,7 +6,6 @@ import fr.univlille1.m2iagl.petit.singleton.Orders;
 public class Start {
 
 	public static void main(String[] args) {
-		System.out.println("Begin Orders and Clients application :\n");
 		Orders orders = new Orders();		
 		
 		Clients clients = new Clients();
@@ -42,13 +41,13 @@ public class Start {
 		clientD.addOrder(orderE);
 		clientD.addOrder(orderF);
 		
-		System.out.println("\n---------------------------------------------------------------------------------");
-		System.out.println("Print all orders\n");
-		
-		for (Order ord : orders.getAllOrders()) {
-			ord.printOrder();
-		}
-		System.out.println("---------------------------------------------------------------------------------\n");
+//		System.out.println("\n---------------------------------------------------------------------------------");
+//		System.out.println("Print all orders\n");
+//		
+//		for (Order ord : orders.getAllOrders()) {
+//			ord.printOrder();
+//		}
+//		System.out.println("---------------------------------------------------------------------------------\n");
 				
 		clients.delClient(clientA);
 		clientA.delOrder(orderA);

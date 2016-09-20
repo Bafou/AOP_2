@@ -1,7 +1,5 @@
 package fr.univlille1.m2iagl.petit;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Client {
 

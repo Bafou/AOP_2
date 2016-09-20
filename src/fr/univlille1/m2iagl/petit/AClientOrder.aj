@@ -3,6 +3,8 @@ package fr.univlille1.m2iagl.petit;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.univlille1.m2iagl.petit.singleton.Clients;
+
 public aspect AClientOrder {
 
 	private Client Order.client;
@@ -56,36 +58,36 @@ public aspect AClientOrder {
 	void around(Client client): aroundClientsDel(client) {
 		if (!client.hasOrder()) {
 			proceed(client);
-			System.out.println("Client " + client.getName() + " deleted");
+//			System.out.println("Client " + client.getName() + " deleted");
 		}
-		else {
-			System.out.println("Client " + client.getName() + " can't be deleted : Client still have orders");
-		}
+//		else {
+//			System.out.println("Client " + client.getName() + " can't be deleted : Client still have orders");
+//		}
 	}
 	
-	pointcut logClientAddOrder(Order order) :
-		call(void Client.addOrder(Order)) && args(order);
-	after(Order order): logClientAddOrder(order){
-		Client client = (Client) thisJoinPoint.getTarget();
-		System.out.println("Add order " + order.getId() + " to client " + client.getName());
-	}
-	
-	pointcut logClientDelOrder(Order order) :
-		call(void Client.delOrder(Order)) && args(order);
-	after(Order order): logClientDelOrder(order){
-		Client client = (Client) thisJoinPoint.getTarget();
-		System.out.println("Del order " + order.getId() + " from client " + client.getName());
-	}
-	
-	pointcut logOrderSetClient(Client client) :
-		call(void Order.setClient(Client)) && args(client);
-	after(Client client): logOrderSetClient(client){
-		Order order = (Order) thisJoinPoint.getTarget();
-		if (client == null ) {
-			System.out.println("Removing client from order " + order.getId());
-		}
-		else {
-			System.out.println("The client of order " + order.getId() + " is client " + client.getName());			
-		}
-	}
+//	pointcut logClientAddOrder(Order order) :
+//		call(void Client.addOrder(Order)) && args(order);
+//	after(Order order): logClientAddOrder(order){
+//		Client client = (Client) thisJoinPoint.getTarget();
+//		System.out.println("Add order " + order.getId() + " to client " + client.getName());
+//	}
+//	
+//	pointcut logClientDelOrder(Order order) :
+//		call(void Client.delOrder(Order)) && args(order);
+//	after(Order order): logClientDelOrder(order){
+//		Client client = (Client) thisJoinPoint.getTarget();
+//		System.out.println("Del order " + order.getId() + " from client " + client.getName());
+//	}
+//	
+//	pointcut logOrderSetClient(Client client) :
+//		call(void Order.setClient(Client)) && args(client);
+//	after(Client client): logOrderSetClient(client){
+//		Order order = (Order) thisJoinPoint.getTarget();
+//		if (client == null ) {
+//			System.out.println("Removing client from order " + order.getId());
+//		}
+//		else {
+//			System.out.println("The client of order " + order.getId() + " is client " + client.getName());			
+//		}
+//	}
 }
