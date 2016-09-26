@@ -5,6 +5,12 @@ import java.util.List;
 
 import fr.univlille1.m2iagl.petit.Client;
 
+/**
+ * Clients manages all clients of the application.
+ * 
+ * @author PETIT Antoine
+ *
+ */
 public class Clients {
 
 	protected List<Client> allClient;

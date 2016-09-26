@@ -3,11 +3,21 @@ package fr.univlille1.m2iagl.petit;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Aspect which manage the creation of a call Diagram
+ * 
+ * @author PETIT Antoine
+ *
+ */
 public aspect ALogDiagram {
 
-	List<Object> listOfAllObjects = new ArrayList<Object>();
-
-	void printAllLines() {
+	final List<Object> listOfAllObjects = new ArrayList<Object>();
+	final StringBuilder logDiagram = new StringBuilder();
+	
+	/**
+	 * Add a complete line with every Object line to logDiagram
+	 */
+	private void addCompleteLines() {
 		final StringBuilder sb = new StringBuilder();
 		sb.append('|');
 		for (int i = 0; i < listOfAllObjects.size(); i++) {
@@ -21,10 +31,20 @@ public aspect ALogDiagram {
 		for (int j = 0; j < 20; j++) {
 			sb.append(' ');
 		}
-		System.out.println(sb.toString());
+		sb.append('\n');
+		logDiagram.append(sb);
 	}
 
-	void printCallLine(final Object beginCall, final Object endCall,
+	/**
+	 * Add to the logDiagram the call line with the arrow
+	 * This method is also able to write the return line of the method if you invert
+	 * beginCall and endCall value
+	 * 
+	 * @param beginCall the object which make the method call
+	 * @param endCall the object which receive the method call
+	 * @param methodName the name of the method
+	 */
+	private void addCallLine(final Object beginCall, final Object endCall,
 			final String methodName) {
 		int beginPosition = listOfAllObjects.indexOf(beginCall);
 		int endPosition = listOfAllObjects.indexOf(endCall);
@@ -40,6 +60,7 @@ public aspect ALogDiagram {
 		final StringBuilder sb = new StringBuilder();
 		String newMethodName = methodName;
 
+		//Manage the name of the method in order to have the same length everywhere 
 		if (methodName.length() > 10) {
 			newMethodName = methodName.substring(0, 10);
 		}
@@ -48,7 +69,7 @@ public aspect ALogDiagram {
 		//the fact that the main is not in the list
 
 		sb.append('|');
-		// Print part before caller
+		// Add part before caller
 		for (int i = 0; i < beginPosition; i++) {
 			for (int j = 0; j < 20; j++) {
 				sb.append(' ');
@@ -56,7 +77,7 @@ public aspect ALogDiagram {
 			sb.append('|');
 		}
 
-		// Print method arrow
+		// Add method arrow
 		sb.append(beginingArrow);
 
 		sb.append(newMethodName);
@@ -78,18 +99,20 @@ public aspect ALogDiagram {
 			}
 			sb.append('|');
 		}
-		System.out.print(sb.toString());
+		logDiagram.append(sb);
 	}
 
 	pointcut traceMainMethod() : 
 		execution (* fr.univlille1.m2iagl.petit..main (..));
 
-	Object around() : traceMainMethod() {
+	before() : traceMainMethod() {
 		final String className = thisJoinPoint.getSignature()
 				.getDeclaringTypeName();
-		System.out.println(className.substring(className.lastIndexOf(".") + 1));
-		final Object ret = proceed();
-		return ret;
+		logDiagram.append(className.substring(className.lastIndexOf(".") + 1) + '\n');
+	}
+	
+	after() : traceMainMethod() {
+		System.out.println(logDiagram.toString());
 	}
 
 	pointcut traceCallNewMethod() :
@@ -98,15 +121,15 @@ public aspect ALogDiagram {
 	Object around() : traceCallNewMethod() {
 		final Object ret = proceed();
 
-		printAllLines();
+		addCompleteLines();
 		listOfAllObjects.add(ret);
 
-		printCallLine(thisJoinPoint.getSourceLocation(), ret, "new");
-		System.out.print(ret.toString().substring(
+		addCallLine(thisJoinPoint.getSourceLocation(), ret, "new");
+		logDiagram.append(ret.toString().substring(
 				ret.toString().lastIndexOf(".") + 1)
 				+ "\n");
 
-		printAllLines();
+		addCompleteLines();
 
 		return ret;
 	}
@@ -116,19 +139,19 @@ public aspect ALogDiagram {
 
 	Object around() : traceCallMethod() {
 
-		printAllLines();
+		addCompleteLines();
 
-		printCallLine(thisJoinPoint.getThis(), thisJoinPoint.getTarget(),
+		addCallLine(thisJoinPoint.getThis(), thisJoinPoint.getTarget(),
 				thisJoinPoint.getSignature().getName());
-		System.out.println();
-		printAllLines();
+		logDiagram.append('\n');
+		addCompleteLines();
 		Object ret = proceed();
 
-		printAllLines();
-		// print return line
-		printCallLine(thisJoinPoint.getTarget(), thisJoinPoint.getThis(), "");
-		System.out.println();
-		printAllLines();
+		addCompleteLines();
+		// add return line to logDiagram
+		addCallLine(thisJoinPoint.getTarget(), thisJoinPoint.getThis(), "");
+		logDiagram.append('\n');
+		addCompleteLines();
 
 		return ret;
 	}

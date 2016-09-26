@@ -5,6 +5,12 @@ import java.util.List;
 
 import fr.univlille1.m2iagl.petit.Order;
 
+/**
+ * Orders manages all orders of the application
+ *  
+ * @author PETIT Antoine
+ *
+ */
 public class Orders {
 
 	protected List<Order> allOrders;

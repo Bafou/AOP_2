@@ -41,13 +41,13 @@ public class Start {
 		clientD.addOrder(orderE);
 		clientD.addOrder(orderF);
 		
-//		System.out.println("\n---------------------------------------------------------------------------------");
-//		System.out.println("Print all orders\n");
-//		
-//		for (Order ord : orders.getAllOrders()) {
-//			ord.printOrder();
-//		}
-//		System.out.println("---------------------------------------------------------------------------------\n");
+		System.out.println("\n---------------------------------------------------------------------------------");
+		System.out.println("Print all orders\n");
+		
+		for (Order ord : orders.getAllOrders()) {
+			ord.printOrder();
+		}
+		System.out.println("---------------------------------------------------------------------------------\n");
 				
 		clients.delClient(clientA);
 		clientA.delOrder(orderA);

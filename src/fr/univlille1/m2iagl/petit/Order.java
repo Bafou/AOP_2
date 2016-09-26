@@ -1,5 +1,12 @@
 package fr.univlille1.m2iagl.petit;
 
+
+/**
+ * A Order has an id and amount
+ * 
+ * @author PETIT Antoine
+ *
+ */
 public class Order {
 
 	private static int idCpt = 0;

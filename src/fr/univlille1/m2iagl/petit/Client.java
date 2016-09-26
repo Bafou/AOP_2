@@ -1,15 +1,20 @@
 package fr.univlille1.m2iagl.petit;
 
-
+/**
+ * A Client has name and adress
+ * 
+ * @author PETIT Antoine
+ *
+ */
 public class Client {
 
 	protected String name;
-	protected String adresse;
+	protected String adress;
 	
 	public Client(final String name, final String adresse) {
 		super();
 		this.name = name;
-		this.adresse = adresse;
+		this.adress = adresse;
 	}
 
 	public String getName() {
@@ -21,11 +26,11 @@ public class Client {
 	}
 
 	public String getAdresse() {
-		return adresse;
+		return adress;
 	}
 
 	public void setAdresse(final String adresse) {
-		this.adresse = adresse;
+		this.adress = adresse;
 	}
 
 }

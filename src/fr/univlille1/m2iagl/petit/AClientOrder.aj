@@ -50,7 +50,7 @@ public aspect AClientOrder {
 	after(): toPrintOrder() {
 		Order myOrder = (Order) thisJoinPoint.getTarget();
 		Client myClient = myOrder.getClient();
-		System.out.println("\tClient's name : " + myClient.name + "\n\tClient's adress : " + myClient.adresse);
+		System.out.println("\tClient's name : " + myClient.name + "\n\tClient's adress : " + myClient.adress);
 	}
 	
 	pointcut aroundClientsDel(Client client) :
