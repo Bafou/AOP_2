@@ -17,4 +17,4 @@ Exercice 2 : Aspect permettant l'affichage d'un diagramme d'échanges de message
 
 	Enfin on applique un around autour des méthodes appelées pour afficher l'appel ainsi que le retour des méthodes.
 
-	Pour le moment l'affichage se fait en direct, une amélioration possible est, au lieu d'afficher en direct, d'ajouter à un StringBuilder avant de faire l'affichage lors d'un after sur le main.
+	L'affichage est géré grâce à un stringBuilder qui construit l'ensemble du diagrammme et qui permet de faire l'affichage une fois le main terminé.

@@ -149,7 +149,7 @@ public aspect ALogDiagram {
 
 		addCompleteLines();
 		// add return line to logDiagram
-		addCallLine(thisJoinPoint.getTarget(), thisJoinPoint.getThis(), "");
+		addCallLine(thisJoinPoint.getTarget(), thisJoinPoint.getThis(),thisJoinPoint.getSignature().getName() );
 		logDiagram.append('\n');
 		addCompleteLines();
 
